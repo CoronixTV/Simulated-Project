@@ -50,14 +50,17 @@ public class Aeronautics {
 
 	public static void setTooltips() {
 		getRegistrate().setTooltipModifierFactory(item -> {
-			final Rarity rarity = item.getDefaultInstance().getRarity();
-			FontHelper.Palette color = FontHelper.Palette.STANDARD_CREATE;
-			if (rarity == Rarity.EPIC)
-				color = new FontHelper.Palette(TooltipHelper.styleFromColor(SimColors.EPIC_OURPLE), TooltipHelper.styleFromColor(rarity.color()));
+			final TooltipModifier kineticStats = TooltipModifier.mapNull(KineticStats.create(item));
+			return context -> {
+				final Rarity rarity = context.getItemStack().getRarity();
+				FontHelper.Palette color = FontHelper.Palette.STANDARD_CREATE;
+				if (rarity == Rarity.EPIC)
+					color = new FontHelper.Palette(TooltipHelper.styleFromColor(SimColors.EPIC_OURPLE), TooltipHelper.styleFromColor(rarity.color()));
 
-			return new ItemDescription
-					.Modifier(item, color)
-					.andThen(TooltipModifier.mapNull(KineticStats.create(item)));
+				new ItemDescription.Modifier(item, color)
+						.andThen(kineticStats)
+						.modify(context);
+			};
 		});
 	}
 
