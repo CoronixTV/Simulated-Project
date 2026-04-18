@@ -63,7 +63,7 @@ public final class Simulated {
         getRegistrate().setTooltipModifierFactory(item -> {
             final TooltipModifier kineticStats = TooltipModifier.mapNull(KineticStats.create(item));
             return context -> {
-                final Rarity rarity = context.getItemStack().getRarity();
+                final Rarity rarity = item.getDefaultInstance().getRarity();
                 FontHelper.Palette color = FontHelper.Palette.STANDARD_CREATE;
                 if (rarity == Rarity.EPIC)
                     color = new FontHelper.Palette(TooltipHelper.styleFromColor(SimColors.EPIC_OURPLE), TooltipHelper.styleFromColor(rarity.color()));

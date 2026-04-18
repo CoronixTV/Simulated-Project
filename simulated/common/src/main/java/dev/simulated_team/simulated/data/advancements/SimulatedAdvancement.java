@@ -182,7 +182,7 @@ public class SimulatedAdvancement {
         }
 
         public Builder icon(final ItemProviderEntry<?, ?> item) {
-            return this.icon(item::asStack);
+            return this.icon(() -> item.asStack());
         }
 
         public Builder icon(final ItemLike item) {
